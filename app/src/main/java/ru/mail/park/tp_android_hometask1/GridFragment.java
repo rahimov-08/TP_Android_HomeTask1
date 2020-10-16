@@ -32,34 +32,36 @@ public class GridFragment extends Fragment {
     private static final int DEFAULT_AMOUNT_OF_ITEMS = 100;
     private static final String STATE = "lastListSize";
     private List<Digit> digitList;
-    private int listSize;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("myLogs","Fragment1  onCreate");
-        if(savedInstanceState == null)
-            listSize = DEFAULT_AMOUNT_OF_ITEMS;
-        else
-            listSize = savedInstanceState.getInt(STATE);
-
+    public GridFragment(){
+        this.setArguments(new Bundle());
+        this.getArguments().putInt(STATE,DEFAULT_AMOUNT_OF_ITEMS);
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(STATE,digitList.size());
-        Log.d("myLogs","Fragment1  onSaveInstanceState");
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if(savedInstanceState == null)
+//            listSize = DEFAULT_AMOUNT_OF_ITEMS;
+//        else
+//            listSize = savedInstanceState.getInt(STATE);
+//    }
+
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt(STATE,digitList.size());
+//    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.d("myLogs","Fragment1  onCreateView");
+        int listSize = getArguments().getInt(STATE);
+
         View fragment_layout = inflater.inflate(R.layout.grid_fragment,container,false);
         Button addBtn = fragment_layout.findViewById(R.id.add_btn);
         digitList = new ArrayList<>();
-        for (int i = 0; i < listSize ; i++) {
+        for (int i = 0; i < listSize; i++) {
             digitList.add(new Digit(i+1));
         }
         RecyclerView recyclerView = fragment_layout.findViewById(R.id.recycler);
@@ -77,70 +79,8 @@ public class GridFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.d("myLogs", "Fragment1  onAttach");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d("myLogs", "Fragment1  onActivityCreated");
-        if(savedInstanceState == null)
-            listSize = DEFAULT_AMOUNT_OF_ITEMS;
-        else
-            listSize = savedInstanceState.getInt(STATE);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("myLogs", "Fragment1  onStart");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("myLogs", "Fragment1  onResume");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("myLogs", "Fragment1  onPause");
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
-        Log.d("myLogs", "Fragment1  onStop");
+        getArguments().putInt(STATE,digitList.size());
     }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d("myLogs", "Fragment1  onDestroyView");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("myLogs", "Fragment1  onDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d("myLogs", "Fragment1  onDetach");
-    }
-
-
-    @Override
-    public void onViewStateRestored(@Nullable final Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        Log.d("myLogs", "Fragment1  onViewStateRestored");
-    }
-
-
-
 }

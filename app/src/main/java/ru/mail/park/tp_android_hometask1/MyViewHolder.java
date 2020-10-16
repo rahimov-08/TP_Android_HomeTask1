@@ -1,6 +1,5 @@
 package ru.mail.park.tp_android_hometask1;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 

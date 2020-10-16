@@ -8,6 +8,7 @@ import android.graphics.Color;
  * Created 14/10/2020
  */
 public class Digit {
+
     private int value;
     private int color;
 

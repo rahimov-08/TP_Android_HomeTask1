@@ -44,12 +44,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View v) {
                 fragmentManager
                         .beginTransaction()
-                        .replace(R.id.fragment_container, new DigitFragment())
-                        .addToBackStack("GRID_FRAGMENT_TRANSACTION")
+                        .replace(R.id.fragment_container, DigitFragment.newInstance(model.getValue(),model.getColor()))
+                        .addToBackStack(null)
                         .commitAllowingStateLoss();
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return mDigits.size();

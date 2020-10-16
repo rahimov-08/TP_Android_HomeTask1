@@ -11,7 +11,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="150sp"
-        android:textColor="#F44336"
-        android:text="2"
         tools:text = "2"/>
 </LinearLayout>
