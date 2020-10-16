@@ -21,6 +21,12 @@ import ru.mail.park.tp_android_hometask1.Digit;
 import ru.mail.park.tp_android_hometask1.MyAdapter;
 import ru.mail.park.tp_android_hometask1.R;
 
+
+/**
+ * Fragment showing a grid of numbers
+ * @autor Mahmudjon Rahimov
+ * Created 14/10/2020
+ */
 public class GridFragment extends Fragment {
 
     private static final int DEFAULT_AMOUNT_OF_ITEMS = 100;

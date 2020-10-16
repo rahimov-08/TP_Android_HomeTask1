@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/**
+ * RecyclerView Adapter for grid
+ * @autor Mahmudjon Rahimov
+ * Created 14/10/2020
+ */
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private  List<Digit> mDigits;
@@ -40,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 fragmentManager
                         .beginTransaction()
                         .replace(R.id.fragment_container, new DigitFragment())
-                        .addToBackStack(null)
+                        .addToBackStack("GRID_FRAGMENT_TRANSACTION")
                         .commitAllowingStateLoss();
             }
         });

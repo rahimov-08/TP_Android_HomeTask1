@@ -13,6 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import ru.mail.park.tp_android_hometask1.R;
 
+/**
+ * Fragment showing the pressed number
+ * @autor Mahmudjon Rahimov
+ * Created 14/10/2020
+ */
 public class DigitFragment extends Fragment {
 
     @Nullable

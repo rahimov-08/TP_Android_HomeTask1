@@ -2,6 +2,11 @@ package ru.mail.park.tp_android_hometask1;
 
 import android.graphics.Color;
 
+/**
+ * Number representation class
+ * @autor Mahmudjon Rahimov
+ * Created 14/10/2020
+ */
 public class Digit {
     private int value;
     private int color;

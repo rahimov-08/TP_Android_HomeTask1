@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * Main activity of application
+ * @autor Mahmudjon Rahimov
+ * Created 14/10/2020
+ */
 public class MainActivity extends AppCompatActivity {
 
 
