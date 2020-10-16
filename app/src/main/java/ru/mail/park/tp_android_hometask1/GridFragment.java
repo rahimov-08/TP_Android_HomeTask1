@@ -1,6 +1,7 @@
 package ru.mail.park.tp_android_hometask1;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,7 +66,10 @@ public class GridFragment extends Fragment {
             digitList.add(new Digit(i+1));
         }
         RecyclerView recyclerView = fragment_layout.findViewById(R.id.recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        int numberOfColumns = getResources()
+                .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 3 : 4;
+
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),numberOfColumns));
         final MyAdapter adapter = new MyAdapter(digitList,getFragmentManager());
         recyclerView.setAdapter(adapter);
         addBtn.setOnClickListener(new View.OnClickListener() {
