@@ -1,9 +1,7 @@
 package ru.mail.park.tp_android_hometask1;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mail.park.tp_android_hometask1.Digit;
-import ru.mail.park.tp_android_hometask1.MyAdapter;
-import ru.mail.park.tp_android_hometask1.R;
-
 
 /**
  * Fragment showing a grid of numbers
@@ -34,43 +28,40 @@ public class GridFragment extends Fragment {
     private static final String STATE = "lastListSize";
     private List<Digit> digitList;
 
-    public GridFragment(){
-        this.setArguments(new Bundle());
-        this.getArguments().putInt(STATE,DEFAULT_AMOUNT_OF_ITEMS);
-    }
-
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if(savedInstanceState == null)
-//            listSize = DEFAULT_AMOUNT_OF_ITEMS;
-//        else
-//            listSize = savedInstanceState.getInt(STATE);
-//    }
-
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt(STATE,digitList.size());
-//    }
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int listSize = getArguments().getInt(STATE);
-
-        View fragment_layout = inflater.inflate(R.layout.grid_fragment,container,false);
-        Button addBtn = fragment_layout.findViewById(R.id.add_btn);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        int listSize;
+        if(savedInstanceState == null)
+            listSize = DEFAULT_AMOUNT_OF_ITEMS;
+        else
+            listSize = savedInstanceState.getInt(STATE);
         digitList = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
             digitList.add(new Digit(i+1));
         }
-        RecyclerView recyclerView = fragment_layout.findViewById(R.id.recycler);
-        int numberOfColumns = getResources()
-                .getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ? 3 : 4;
+    }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(STATE,digitList.size());
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.grid_fragment,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Button addBtn = view.findViewById(R.id.add_btn);
+        RecyclerView recyclerView = view.findViewById(R.id.recycler);
+        int numberOfColumns = getResources().getInteger(R.integer.gridColNums);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),numberOfColumns));
-        final MyAdapter adapter = new MyAdapter(digitList,getFragmentManager());
+        final MyAdapter adapter = new MyAdapter(getContext(),digitList);
         recyclerView.setAdapter(adapter);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +70,5 @@ public class GridFragment extends Fragment {
                 adapter.notifyItemInserted(digitList.size());
             }
         });
-        return fragment_layout;
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        getArguments().putInt(STATE,digitList.size());
     }
 }

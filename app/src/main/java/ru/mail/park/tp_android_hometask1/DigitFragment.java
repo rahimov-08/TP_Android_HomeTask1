@@ -19,6 +19,8 @@ public class DigitFragment extends Fragment {
 
     private static final String EXTRA_VALUE = "digitValue";
     private static final String EXTRA_COLOR = "digitColor";
+    private String value;
+    private int color;
 
     public static DigitFragment newInstance(int value, int color) {
         Bundle args = new Bundle();
@@ -29,16 +31,24 @@ public class DigitFragment extends Fragment {
         return fragment;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        String value = String.valueOf(getArguments().getInt(EXTRA_VALUE));
-        int color = getArguments().getInt(EXTRA_COLOR);
-
-        View view = inflater.inflate(R.layout.digit_fragment,container,false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         TextView digitTextView = view.findViewById(R.id.digit);
         digitTextView.setText(value);
         digitTextView.setTextColor(color);
-        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        value = String.valueOf(getArguments().getInt(EXTRA_VALUE));
+        color = getArguments().getInt(EXTRA_COLOR);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.digit_fragment,container,false);
     }
 }
